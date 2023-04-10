@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este repositório se refere à automação da aplicação [**_Seu Barriga_**](https://barrigareact.wcaquino.me/)
+Este repositório se refere à automação da aplicação [**_Seu Barriga_**](https://barrigareact.wcaquino.me/).
 
 ## Setup do Projeto
 
