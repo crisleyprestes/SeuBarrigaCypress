@@ -10,11 +10,13 @@ describe('Should test at a functional level', () => {
     })
 
     it('Should create an account', () => {
+        cy.accessAccounts()
         cy.createAccount('Conta qualquer')
         cy.get(locators.MESSAGE).should('contain', 'Conta inserida com sucesso!')
     })
 
     it('Should update an account', () => {
+        cy.accessAccounts()
         cy.updateAccount('Conta para alterar', 'Conta alterada')
         cy.get(locators.MESSAGE).should('contain', 'Conta atualizada com sucesso!')
         cy.xpath('//td[contains(.,"Conta alterada")]').should('exist')

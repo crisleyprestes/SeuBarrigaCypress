@@ -6,13 +6,11 @@ Cypress.Commands.add('accessAccounts', () => {
 })
 
 Cypress.Commands.add('createAccount', (accountName) => {
-    cy.accessAccounts()
     cy.get(locators.CONTAS.NOME).type(accountName)
     cy.get(locators.CONTAS.BTN_SALVAR).click()
 })
 
 Cypress.Commands.add('updateAccount', (account, accountUpdated) => {
-    cy.accessAccounts()
     cy.xpath(`//td[contains(.,"${account}")]/..//i[@class="far fa-edit"]`).click()
     cy.get(locators.CONTAS.NOME).clear().type(accountUpdated)
     cy.get(locators.CONTAS.BTN_SALVAR).click()
