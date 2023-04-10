@@ -22,4 +22,10 @@ describe('Should test at a functional level', () => {
         cy.xpath('//td[contains(.,"Conta alterada")]').should('exist')
     })
 
+    it.only('Should not create an account with same name', () => {
+        cy.accessAccounts()
+        cy.createAccount('Conta mesmo nome')
+        cy.get(locators.MESSAGE).should('contain', 'Erro: Error: Request failed with status code 400')
+    })
+
 })
