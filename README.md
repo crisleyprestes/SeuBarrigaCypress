@@ -112,4 +112,4 @@ Bundled Node version:
 ## Implementação do Código
 
 - Os testes estão implementados no diretório _**cypress/e2e/barriga**_.
-- Configurações gerais do projeto estão no arquivo _**cypress.json**_.
+- Configurações gerais do projeto estão no arquivo _**package.json**_.
