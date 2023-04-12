@@ -1,4 +1,4 @@
-import locators from "./locators"
+import locators from "../locators"
 
 Cypress.Commands.add('resetData', () => {
     cy.get(locators.MENU.SETTINGS).click()

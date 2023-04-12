@@ -1,4 +1,4 @@
-import locators from "./locators"
+import locators from "../locators"
 
 Cypress.Commands.add('accessAccounts', () => {
     cy.get(locators.MENU.SETTINGS).click()
