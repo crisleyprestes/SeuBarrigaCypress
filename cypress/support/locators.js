@@ -6,7 +6,8 @@ const locators = {
     },
     MENU: {
         SETTINGS: '[data-test="menu-settings"]',
-        MOVIMENTACAO: '[data-test="menu-movimentacao"]'
+        MOVIMENTACAO: '[data-test="menu-movimentacao"]',
+        HOME: '[data-test="menu-home"]'
     },
     SETTINGS: {
         RESET: '[href="/reset"]',
@@ -14,18 +15,23 @@ const locators = {
     },
     CONTAS: {
         NOME: '[data-test="nome"]',
-        CONTA_ALTERADA: '//td[contains(.,"Conta alterada")]',
+        CONTA_ALTERADA: nome_conta => `//td[contains(.,'${nome_conta}')]`,
         BTN_SALVAR: '.btn'
     },
     MOVIMENTACAO: {
         DESCRICAO: '[data-test="descricao"]',
         VALOR: '[data-test="valor"]',
         INTERESSADO: '[data-test="envolvido"]',
+        BTN_STATUS: '[data-test="status"]',
         BTN_SALVAR: '.btn-primary'
     },
     EXTRATO: {
         MOVIMENTACOES: '//li[@data-test]',
-        MOVIMENTACAO_CADASTRADA: '//span[contains(., "Desc")]/following-sibling::small[contains(., "123")]'
+        MOVIMENTACAO_CADASTRADA: (description, value) => `//span[contains(., '${description}')]/following-sibling::small[contains(., '${value}')]`
+    },
+    HOME: {
+        SALDO_CONTA: nome_conta => `//td[contains(., '${nome_conta}')]/following-sibling::td`,
+        SALDO_TOTAL: '//td[contains(., "Total")]/following-sibling::td'
     },
     MESSAGE: '.toast-message'
 }

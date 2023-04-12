@@ -19,7 +19,7 @@ describe('Should test accounts feature at the functional level', () => {
         cy.accessAccounts()
         cy.updateAccount('Conta para alterar', 'Conta alterada')
         cy.get(locators.MESSAGE).should('contain', 'Conta atualizada com sucesso!')
-        cy.xpath(locators.CONTAS.CONTA_ALTERADA).should('exist')
+        cy.xpath(locators.CONTAS.CONTA_ALTERADA('Conta alterada')).should('exist')
     })
 
     it('Should not create an account with same name', () => {
