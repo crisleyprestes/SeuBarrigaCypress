@@ -21,6 +21,7 @@ const locators = {
     },
     MOVIMENTACAO: {
         DESCRICAO: '[data-test="descricao"]',
+        DATA_TRANSACAO: '[data-test="data-transacao"]',
         VALOR: '[data-test="valor"]',
         INTERESSADO: '[data-test="envolvido"]',
         CONTA: '[data-test="conta"]',
@@ -31,6 +32,7 @@ const locators = {
         MOVIMENTACOES: '//li[@data-test]',
         MOVIMENTACAO_CADASTRADA: (description, value) => `//span[contains(., '${description}')]/following-sibling::small[contains(., '${value}')]`,
         ICON_DELETAR: description => `//li[contains(., "${description}")]//i[@class="far fa-trash-alt"]`,
+        ICON_EDITAR: description => `//li[contains(., "${description}")]//i[@class="fas fa-edit"]`,
         MOVIMENTACAO_EXCLUIDA: description => `//span[contains(., '${description}')]`
     },
     HOME: {

@@ -14,3 +14,11 @@ Cypress.Commands.add('removeTransaction', (description) => {
     cy.get(locators.MENU.EXTRATO).click()
     cy.xpath(locators.EXTRATO.ICON_DELETAR(description)).click()
 })
+
+Cypress.Commands.add('editTransaction', (description) => {
+    cy.get(locators.MENU.EXTRATO).click()
+    cy.xpath(locators.EXTRATO.ICON_EDITAR(description)).click()
+    cy.get(locators.MOVIMENTACAO.DESCRICAO).should('have.value', description)
+    cy.get(locators.MOVIMENTACAO.BTN_STATUS).click()
+    cy.get(locators.MOVIMENTACAO.BTN_SALVAR).click()   
+})

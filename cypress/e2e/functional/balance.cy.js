@@ -18,14 +18,10 @@ describe('Should test balance feature at a functional level', () => {
     })
 
     it('Should get balance updated', () => {
-        cy.createTransaction('Nova transação', '250', 'Crisley', 'Conta para movimentacoes')
-        cy.get(locators.MESSAGE).should('contain', 'Movimentação inserida com sucesso!')
+        cy.editTransaction('Movimentacao 1, calculo saldo')
+        cy.get(locators.MESSAGE).should('contain', 'Movimentação alterada com sucesso!')
         cy.get(locators.MENU.HOME).click()
-        cy.xpath(locators.HOME.SALDO_CONTA('Conta para movimentacoes'))
-            .should('contain', '-')
-            .and('contain', '1.250,00')
-        cy.xpath(locators.HOME.SALDO_TOTAL)
-            .should('contain', '-')
-            .and('contain', '2.436,00')
+        cy.xpath(locators.HOME.SALDO_CONTA('Conta para saldo')).should('contain', '4.034,00')
+        cy.xpath(locators.HOME.SALDO_TOTAL).should('contain', '814,00')
     })
 })
