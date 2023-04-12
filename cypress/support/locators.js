@@ -7,7 +7,8 @@ const locators = {
     MENU: {
         SETTINGS: '[data-test="menu-settings"]',
         MOVIMENTACAO: '[data-test="menu-movimentacao"]',
-        HOME: '[data-test="menu-home"]'
+        HOME: '[data-test="menu-home"]',
+        EXTRATO: '[data-test="menu-extrato"]'
     },
     SETTINGS: {
         RESET: '[href="/reset"]',
@@ -27,7 +28,9 @@ const locators = {
     },
     EXTRATO: {
         MOVIMENTACOES: '//li[@data-test]',
-        MOVIMENTACAO_CADASTRADA: (description, value) => `//span[contains(., '${description}')]/following-sibling::small[contains(., '${value}')]`
+        MOVIMENTACAO_CADASTRADA: (description, value) => `//span[contains(., '${description}')]/following-sibling::small[contains(., '${value}')]`,
+        ICON_DELETAR: description => `//li[contains(., "${description}")]//i[@class="far fa-trash-alt"]`,
+        MOVIMENTACAO_EXCLUIDA: description => `//span[contains(., '${description}')]`
     },
     HOME: {
         SALDO_CONTA: nome_conta => `//td[contains(., '${nome_conta}')]/following-sibling::td`,
