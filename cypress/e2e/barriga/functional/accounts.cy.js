@@ -2,7 +2,7 @@
 
 import locators from "../../../support/locators"
 
-describe('Should test at a functional level', () => {
+describe('Should test accounts feature at the functional level', () => {
 
     beforeEach(() => {
         cy.login('crisley@mail.com', '123456')
@@ -19,10 +19,10 @@ describe('Should test at a functional level', () => {
         cy.accessAccounts()
         cy.updateAccount('Conta para alterar', 'Conta alterada')
         cy.get(locators.MESSAGE).should('contain', 'Conta atualizada com sucesso!')
-        cy.xpath('//td[contains(.,"Conta alterada")]').should('exist')
+        cy.xpath(locators.CONTAS.CONTA_ALTERADA).should('exist')
     })
 
-    it.only('Should not create an account with same name', () => {
+    it('Should not create an account with same name', () => {
         cy.accessAccounts()
         cy.createAccount('Conta mesmo nome')
         cy.get(locators.MESSAGE).should('contain', 'Erro: Error: Request failed with status code 400')

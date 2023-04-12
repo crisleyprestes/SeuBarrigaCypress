@@ -18,6 +18,7 @@ import './commands'
 import './featuresCommands/accounts'
 import './featuresCommands/login'
 import './featuresCommands/manageData'
+import './featuresCommands/transactions'
 
 import './locators'
 
