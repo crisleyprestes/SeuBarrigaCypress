@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import locators from "../../support/locators"
+import locators from "../../../support/locators"
 
 describe('Should test at a functional level', () => {
 
