@@ -10,11 +10,11 @@ describe('Should test transactions feature at a functional level', () => {
     })
 
     it('Should create a transaction', () => {
-        cy.createTransaction('Desc', '123', 'Inter')
+        cy.createTransaction('Teste', '123', 'Crisley', 'Conta para movimentacoes')
         cy.get(locators.MESSAGE).should('contain', 'Movimentação inserida com sucesso!')
         cy.url().should('equal', 'https://barrigareact.wcaquino.me/extrato')
         cy.xpath(locators.EXTRATO.MOVIMENTACOES).should('have.length', 7)
-        cy.xpath(locators.EXTRATO.MOVIMENTACAO_CADASTRADA('Desc', '123')).should('exist')
+        cy.xpath(locators.EXTRATO.MOVIMENTACAO_CADASTRADA('Teste', '123,00')).should('exist')
     })
 
     it('Should remove a transaction', () => {
