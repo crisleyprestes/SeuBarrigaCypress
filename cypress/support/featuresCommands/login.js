@@ -8,7 +8,7 @@ Cypress.Commands.add('login', (user, password) => {
     cy.get(locators.MESSAGE, { timeout : 10000 }).should('contain', 'Bem vindo')
 })
 
-Cypress.Commands.add('loginAPI', (user, password) => {
+Cypress.Commands.add('getToken', (user, password) => {
     cy.request({
         method: 'POST',
         url: 'https://barrigarest.wcaquino.me/signin',
@@ -17,10 +17,8 @@ Cypress.Commands.add('loginAPI', (user, password) => {
             redirecionar: false,
             senha: password
         }
-    }).then(response => {
-        expect(response.body.token).not.to.be.empty
-        expect(response.body.nome).to.be.exist
-        expect(response.body.id).to.be.exist
-        expect(response.status).to.be.equal(200)
+    }).its('body.token').should('not.be.empty')
+    .then(token => {
+        return token
     })
 })

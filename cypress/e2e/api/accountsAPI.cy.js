@@ -1,22 +1,16 @@
 /// <reference types="cypress" />
 
 describe('Should test accounts feature at API level', () => {
+    let token
 
     beforeEach(() => {
-        // cy.loginAPI('crisley@mail.com', '123456')
+        cy.getToken('crisley@mail.com', '123456')
+            .then(userToken => {
+                token = userToken
+            })
     })
 
     it('Should create an account', () => {
-        cy.request({
-            method: 'POST',
-            url: 'https://barrigarest.wcaquino.me/signin',
-            body: {
-                email: 'crisley@mail.com',
-                redirecionar: false,
-                senha: '123456'
-            }
-        }).its('body.token').should('not.be.empty')
-        .then(token => {
             cy.request({
                 url: 'https://barrigarest.wcaquino.me/contas',
                 method: 'POST',
@@ -25,7 +19,6 @@ describe('Should test accounts feature at API level', () => {
                     nome: 'Conta via rest'
                 }
             }).as('response')
-        })
 
         cy.get('@response').then(response => {
             expect(response.status).to.be.equal(201)
