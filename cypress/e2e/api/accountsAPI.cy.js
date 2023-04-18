@@ -8,11 +8,12 @@ describe('Should test accounts feature at API level', () => {
             .then(userToken => {
                 token = userToken
             })
+        cy.resetDataAPI('crisley@mail.com', '123456')    
     })
 
     it('Should create an account', () => {
             cy.request({
-                url: 'https://barrigarest.wcaquino.me/contas',
+                url: '/contas',
                 method: 'POST',
                 headers: { Authorization: `JWT ${token}` },
                 body: {
