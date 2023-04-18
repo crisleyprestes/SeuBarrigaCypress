@@ -21,5 +21,6 @@ Cypress.Commands.add('loginAPI', (user, password) => {
         expect(response.body.token).not.to.be.empty
         expect(response.body.nome).to.be.exist
         expect(response.body.id).to.be.exist
+        expect(response.status).to.be.equal(200)
     })
 })
