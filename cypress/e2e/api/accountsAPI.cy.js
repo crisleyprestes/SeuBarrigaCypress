@@ -28,7 +28,26 @@ describe('Should test accounts feature at API level', () => {
         })
     })
 
-    it('Should update an account', () => {
+    it.only('Should update an account', () => {
+        cy.request({
+            method: 'GET',
+            url: '/contas',
+            headers: { Authorization: `JWT ${token}` },
+            qs: {
+                nome: 'Conta para alterar'
+            }
+        }).then(response => {
+            cy.request({
+                url: `/contas/${response.body[0].id}`,
+                method: 'PUT',
+                headers: { Authorization: `JWT ${token}` },
+                body: {
+                    nome: 'Conta alterada via rest'
+                }
+            }).as('response')
+        })
+
+        cy.get('@response').its('status').should('be.equal', 200)
     })
 
     it('Should not create an account with same name', () => {
