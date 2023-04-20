@@ -11,6 +11,7 @@ Para este projeto são necessários as seguintes aplicações/ferramentas:
 - [Node.js (versão 18.5.0 ou superior)](https://nodejs.org/en)
 - [Cypress (versão 12.9.0 ou superior)](https://www.cypress.io/)
 - [Cypress/Xpath (versão 2.0.3 ou superior)](https://github.com/cypress-io/cypress/tree/develop/npm/xpath)
+- [Moment (versão 2.29.4 ou superior)](https://momentjs.com/docs/#/-project-status/recommendations/)
 - [Git (versão 2.39.1)](https://git-scm.com/downloads)
 - [VS Code (versão 1.77.0)](https://code.visualstudio.com/download)
 
@@ -53,6 +54,20 @@ Bundled Node version:
 
 - Salve o arquivo e a dependência será carregada para dentro do projeto. Para utilizá-la, basta chamá-la dentro de cada teste usando a seguinte sintaxe:
 <pre>cy.xpath('xpathLocator')</pre>
+
+### Moment
+
+- Esta dependência é utilizada para obter e formatar datas dentro do projeto no padrão _**DD/MM/YYYY**_. Ele substitui o comando _**Cypress.moment()**_, que foi descontinuado a partir da versão _6.1.0_.
+
+- No CMD, navegue até o diretório raiz do projeto e execute o comando abaixo:
+<pre>npm install moment</pre>
+
+- Aguarde a instalação ser finalizada. O plugin será adicionado como uma dependência dentro do arquivo _**package.json**_.
+
+- Para usá-la, declare-a no topo da classe de teste:
+<pre>import moment from 'moment'</pre>
+
+- Em seguida é só utilizar o método _**moment()**_ dentro dos casos de teste.
 
 ### Git
 

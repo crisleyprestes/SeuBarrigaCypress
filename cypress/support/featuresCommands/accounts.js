@@ -15,3 +15,18 @@ Cypress.Commands.add('updateAccount', (account, accountUpdated) => {
     cy.get(locators.CONTAS.NOME).clear().type(accountUpdated)
     cy.get(locators.CONTAS.BTN_SALVAR).click()
 })
+
+Cypress.Commands.add('getAccountByName', (accountName) => {
+    cy.getToken('crisley@mail.com', '123456').then(token => {
+        cy.request({
+            method: 'GET',
+            url: '/contas',
+            headers: { Authorization: `JWT ${token}` },
+            qs: {
+                nome: accountName
+            }
+        }).then(response => {
+            return response.body[0].id
+        })
+    })
+})
