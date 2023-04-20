@@ -12,14 +12,14 @@ describe('Should test accounts feature at API level', () => {
     })
 
     it('Should create an account', () => {
-            cy.request({
-                url: '/contas',
-                method: 'POST',
-                headers: { Authorization: `JWT ${token}` },
-                body: {
-                    nome: 'Conta via rest'
-                }
-            }).as('response')
+        cy.request({
+            url: '/contas',
+            method: 'POST',
+            headers: { Authorization: `JWT ${token}` },
+            body: {
+                nome: 'Conta via rest'
+            }
+        }).as('response')
 
         cy.get('@response').then(response => {
             expect(response.status).to.be.equal(201)
@@ -28,7 +28,7 @@ describe('Should test accounts feature at API level', () => {
         })
     })
 
-    it.only('Should update an account', () => {
+    it('Should update an account', () => {
         cy.request({
             method: 'GET',
             url: '/contas',
@@ -50,7 +50,21 @@ describe('Should test accounts feature at API level', () => {
         cy.get('@response').its('status').should('be.equal', 200)
     })
 
-    it('Should not create an account with same name', () => {
+    it.only('Should not create an account with same name', () => {
+        cy.request({
+            url: '/contas',
+            method: 'POST',
+            headers: { Authorization: `JWT ${token}` },
+            body: {
+                nome: 'Conta mesmo nome'
+            },
+            failOnStatusCode: false
+        }).as('response')
+
+        cy.get('@response').then(response => {
+            expect(response.status).to.be.equal(400)
+            expect(response.body.error).to.be.equal('Já existe uma conta com esse nome!')
+        })
     })
 
 })
