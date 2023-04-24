@@ -15,10 +15,10 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-import './featuresCommands/accounts'
-import './featuresCommands/login'
-import './featuresCommands/manageData'
-import './featuresCommands/transactions'
+import './commands/accounts'
+import './commands/login'
+import './commands/manageData'
+import './commands/transactions'
 
 import './locators'
 
