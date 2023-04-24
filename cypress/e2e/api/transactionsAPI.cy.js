@@ -13,7 +13,7 @@ describe('Should test transactions feature at API level', () => {
         cy.resetDataAPI('crisley@mail.com', '123456')  
     })
 
-    it.only('Should create a transaction', () => {
+    it('Should create a transaction', () => {
         cy.getAccountByName('Conta para movimentacoes')
             .then(contaID => {
                 cy.request({
@@ -38,6 +38,20 @@ describe('Should test transactions feature at API level', () => {
 
     })
 
-    it('Should remove a transaction', () => {
+    it.only('Should remove a transaction', () => {
+        cy.request({
+            method: 'GET',
+            url: '/transacoes',
+            headers: { Authorization: `JWT ${token} `},
+            qs:{
+                descricao: 'Movimentacao para exclusao'
+            }
+        }).then(response => {
+            cy.request({
+                url: `/transacoes/${response.body[0].id}`,
+                method: 'DELETE',
+                headers: { Authorization: `JWT ${token} `}
+            }).its('status').should('be.equal', 204)
+        })
     })
 })

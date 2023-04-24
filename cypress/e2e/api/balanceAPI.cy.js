@@ -27,7 +27,7 @@ describe('Should test balance feature at API level', () => {
         })
     })
 
-    it.only('Should get balance updated', () => {
+    it('Should get balance updated', () => {
         cy.request({
             method: 'GET',
             url: '/transacoes',
