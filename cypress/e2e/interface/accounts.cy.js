@@ -31,7 +31,7 @@ describe('Should test accounts feature at an interface level', () => {
         cy.login('crisley@mail.com', '123456')
     })
 
-    it.only('Should create an account', () => {
+    it('Should create an account', () => {
         cy.intercept('GET', '/contas', 
             [{
                 id: 1,
@@ -82,9 +82,47 @@ describe('Should test accounts feature at an interface level', () => {
         cy.get(locators.MESSAGE).should('contain', 'Conta inserida com sucesso!')
     })
 
-    it('Should update an account', () => {
+    it.only('Should update an account', () => {
+        cy.intercept('GET', '/contas', 
+            [{
+                id: 1,
+                nome: 'Carteira',
+                visivel: true,
+                usuario_id: 1
+            },
+            {
+                id: 2,
+                nome: 'Banco',
+                visivel: true,
+                usuario_id: 1
+            }]
+        ).as('contas')
+
+        cy.intercept('PUT', '/contas/**', {
+            id: 1,
+            nome: 'Conta alterada',
+            visivel: true,
+            usuario_id: 1
+        }).as('alterarConta')
+
         cy.accessAccounts()
-        cy.updateAccount('Conta para alterar', 'Conta alterada')
+
+        cy.intercept('GET', '/contas', 
+        [{
+            id: 1,
+            nome: 'Conta alterada',
+            visivel: true,
+            usuario_id: 1
+        },
+        {
+            id: 2,
+            nome: 'Banco',
+            visivel: true,
+            usuario_id: 1
+        }]
+        ).as('contas')
+
+        cy.updateAccount('Carteira', 'Conta alterada')
         cy.get(locators.MESSAGE).should('contain', 'Conta atualizada com sucesso!')
         cy.xpath(locators.CONTAS.CONTA_ALTERADA('Conta alterada')).should('exist')
     })
