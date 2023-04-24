@@ -1,13 +1,9 @@
 /// <reference types="cypress" />
 
 describe('Should test accounts feature at API level', () => {
-    let token
 
     beforeEach(() => {
         cy.getToken('crisley@mail.com', '123456')
-            .then(userToken => {
-                token = userToken
-            })
         cy.resetDataAPI('crisley@mail.com', '123456')    
     })
 
@@ -15,7 +11,6 @@ describe('Should test accounts feature at API level', () => {
         cy.request({
             url: '/contas',
             method: 'POST',
-            headers: { Authorization: `JWT ${token}` },
             body: {
                 nome: 'Conta via rest'
             }
@@ -34,7 +29,6 @@ describe('Should test accounts feature at API level', () => {
                 cy.request({
                     url: `/contas/${contaID}`,
                     method: 'PUT',
-                    headers: { Authorization: `JWT ${token}` },
                     body: {
                         nome: 'Conta alterada via rest'
                     }
@@ -48,7 +42,6 @@ describe('Should test accounts feature at API level', () => {
         cy.request({
             url: '/contas',
             method: 'POST',
-            headers: { Authorization: `JWT ${token}` },
             body: {
                 nome: 'Conta mesmo nome'
             },

@@ -3,13 +3,9 @@
 import moment from "moment"
 
 describe('Should test balance feature at API level', () => {
-    let token
 
     beforeEach(() => {
         cy.getToken('crisley@mail.com', '123456')
-            .then(userToken => {
-                token = userToken
-        })
         cy.resetDataAPI('crisley@mail.com', '123456')  
     })
 
@@ -17,7 +13,6 @@ describe('Should test balance feature at API level', () => {
         cy.request({
             url: '/saldo',
             method: 'GET',
-            headers: { Authorization: `JWT ${token}` }
         }).then(response => {
             let saldoConta = null
             response.body.forEach(conta => {
@@ -31,7 +26,6 @@ describe('Should test balance feature at API level', () => {
         cy.request({
             method: 'GET',
             url: '/transacoes',
-            headers: { Authorization: `JWT ${token} `},
             qs:{
                 descricao: 'Movimentacao 1, calculo saldo'
             }
@@ -39,7 +33,6 @@ describe('Should test balance feature at API level', () => {
             cy.request({
                 url: `/transacoes/${response.body[0].id}`,
                 method: 'PUT',
-                headers: { Authorization: `JWT ${token} `},
                 body: {
                     status: true,
                     data_transacao: moment(response.body[0].data_transacao).format('DD/MM/YYYY'),
@@ -55,7 +48,6 @@ describe('Should test balance feature at API level', () => {
         cy.request({
             url: '/saldo',
             method: 'GET',
-            headers: { Authorization: `JWT ${token}` }
         }).then(response => {
             let saldoConta = null
             response.body.forEach(conta => {

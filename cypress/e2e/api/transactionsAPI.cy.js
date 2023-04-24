@@ -3,13 +3,9 @@
 import moment from "moment"
 
 describe('Should test transactions feature at API level', () => {
-    let token
 
     beforeEach(() => {
         cy.getToken('crisley@mail.com', '123456')
-            .then(userToken => {
-                token = userToken
-        })
         cy.resetDataAPI('crisley@mail.com', '123456')  
     })
 
@@ -19,7 +15,6 @@ describe('Should test transactions feature at API level', () => {
                 cy.request({
                     method: 'POST',
                     url: '/transacoes',
-                    headers: { Authorization: `JWT ${token}` },
                     body: {
                         conta_id: contaID,
                         data_pagamento: moment().add({ days: 1 }).format('DD/MM/YYYY'),
@@ -38,11 +33,10 @@ describe('Should test transactions feature at API level', () => {
 
     })
 
-    it.only('Should remove a transaction', () => {
+    it('Should remove a transaction', () => {
         cy.request({
             method: 'GET',
             url: '/transacoes',
-            headers: { Authorization: `JWT ${token} `},
             qs:{
                 descricao: 'Movimentacao para exclusao'
             }
@@ -50,7 +44,6 @@ describe('Should test transactions feature at API level', () => {
             cy.request({
                 url: `/transacoes/${response.body[0].id}`,
                 method: 'DELETE',
-                headers: { Authorization: `JWT ${token} `}
             }).its('status').should('be.equal', 204)
         })
     })
