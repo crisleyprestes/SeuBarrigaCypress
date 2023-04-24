@@ -29,7 +29,6 @@ describe('Should test transactions feature at an interface level', () => {
         ).as('saldo')
 
         cy.login('crisley@mail.com', 'senha errada')
-        cy.resetData()
     })
 
     it('Should create a transaction', () => {
