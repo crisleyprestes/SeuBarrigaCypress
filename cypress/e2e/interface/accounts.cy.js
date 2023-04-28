@@ -80,7 +80,12 @@ describe('Should test accounts feature at an interface level', () => {
         cy.xpath(locators.CONTAS.CONTA_ALTERADA('Conta alterada')).should('exist')
     })
 
-    it('Should not create an account with same name', () => {
+    it.only('Should not create an account with same name', () => {
+        cy.intercept('POST', '/contas', {
+            error: 'Já existe uma conta com esse nome!',
+            statusCode: 400
+        }).as('saveContaMesmoNome')
+
         cy.accessAccounts()
         cy.createAccount('Conta mesmo nome')
         cy.get(locators.MESSAGE).should('contain', 'Erro: Error: Request failed with status code 400')
