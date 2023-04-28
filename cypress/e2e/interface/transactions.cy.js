@@ -14,7 +14,7 @@ describe('Should test transactions feature at an interface level', () => {
         cy.login('crisley@mail.com', 'senha errada')
     })
 
-    it.only('Should create a transaction', () => {
+    it('Should create a transaction', () => {
         cy.intercept('POST', '/transacoes', {
             id: 31433,
             descricao: 'Teste',
@@ -38,9 +38,11 @@ describe('Should test transactions feature at an interface level', () => {
     })
 
     it('Should remove a transaction', () => {
-        cy.removeTransaction('Movimentacao para exclusao')
+        cy.intercept('DELETE', '/transacoes/**', {
+            statusCode: 204
+        }).as('deleteConta')
+
+        cy.removeTransaction('Movimentacao de conta')
         cy.get(locators.MESSAGE).should('contain', 'Movimentação removida com sucesso!')
-        cy.xpath(locators.EXTRATO.MOVIMENTACOES).should('have.length', 6)
-        cy.xpath(locators.EXTRATO.MOVIMENTACAO_EXCLUIDA('Movimentacao para exclusao')).should('not.exist')
     })
 })

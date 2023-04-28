@@ -58,7 +58,7 @@ describe('Should test accounts feature at an interface level', () => {
         cy.xpath(locators.CONTAS.CONTA_ALTERADA('Conta alterada')).should('exist')
     })
 
-    it.only('Should not create an account with same name', () => {
+    it('Should not create an account with same name', () => {
         cy.intercept('POST', '/contas', {
             error: 'Já existe uma conta com esse nome!',
             statusCode: 400

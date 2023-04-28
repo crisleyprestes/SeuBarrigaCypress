@@ -21,7 +21,7 @@ describe('Should test balance feature at an interface level', () => {
             .should('contain', '1.000.100,00')
     })
 
-    it.only('Should get balance updated', () => {
+    it('Should get balance updated', () => {
         cy.fixture('movimentacaoParaSaldo').then((movimentacaoParaSaldo) => {
             cy.intercept('GET', '/transacoes/**', movimentacaoParaSaldo)
         })
