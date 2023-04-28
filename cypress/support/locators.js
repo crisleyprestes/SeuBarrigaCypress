@@ -33,7 +33,8 @@ const locators = {
         MOVIMENTACAO_CADASTRADA: (description, value) => `//span[contains(., '${description}')]/following-sibling::small[contains(., '${value}')]`,
         ICON_DELETAR: description => `//li[contains(., "${description}")]//i[@class="far fa-trash-alt"]`,
         ICON_EDITAR: description => `//li[contains(., "${description}")]//i[@class="fas fa-edit"]`,
-        MOVIMENTACAO_EXCLUIDA: description => `//span[contains(., '${description}')]`
+        MOVIMENTACAO_EXCLUIDA: description => `//span[contains(., '${description}')]`,
+        GET_LINHA: description => `//span[contains(.,'${description}')]/../../../..`
     },
     HOME: {
         SALDO_CONTA: nome_conta => `//td[contains(., '${nome_conta}')]/following-sibling::td`,
