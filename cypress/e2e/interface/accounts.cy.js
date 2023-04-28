@@ -68,4 +68,27 @@ describe('Should test accounts feature at an interface level', () => {
         cy.createAccount('Conta mesmo nome')
         cy.get(locators.MESSAGE).should('contain', 'Erro: Error: Request failed with status code 400')
     })
+
+    it.only('Should validate data send to create an account', () => {
+        cy.intercept('POST', '/contas', {
+            id: 3,
+            nome: 'Conta de teste',
+            visivel: true,
+            usuario_id: 1
+        }).as('saveConta')
+
+        cy.accessAccounts()
+
+        cy.intercept('GET', '/contas', 
+            [
+            {id: 1, nome: 'Carteira', visivel: true, usuario_id: 1},
+            {id: 2, nome: 'Banco', visivel: true, usuario_id: 1},
+            {id: 3, nome: 'Conta de teste', visivel: true, usuario_id: 1}
+            ]
+        ).as('contasSave')
+
+        cy.createAccount('Conta de teste')
+        cy.wait('@saveConta').its('request.body.nome').should('not.be.empty')
+        cy.get(locators.MESSAGE).should('contain', 'Conta inserida com sucesso!')
+    })
 })
