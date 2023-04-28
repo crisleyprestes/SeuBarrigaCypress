@@ -1,0 +1,16 @@
+{
+    "conta": "Conta para extrato", 
+    "id": 31433, 
+    "descricao": "Movimentacao 1, calculo saldo", 
+    "envolvido": "Crisley", 
+    "observacao": null, 
+    "tipo": "REC", 
+    "data_transacao": "2023-04-24T03:00:00.000Z", 
+    "data_pagamento": "2023-04-24T03:00:00.000Z", 
+    "valor": "123.00", 
+    "status": true, 
+    "conta_id": 1720268, 
+    "usuario_id": 36898, 
+    "transferencia_id": null, 
+    "parcelamento_id": null
+}
