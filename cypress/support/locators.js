@@ -8,7 +8,8 @@ const locators = {
         SETTINGS: '[data-test="menu-settings"]',
         MOVIMENTACAO: '[data-test="menu-movimentacao"]',
         HOME: '[data-test="menu-home"]',
-        EXTRATO: '[data-test="menu-extrato"]'
+        EXTRATO: '[data-test="menu-extrato"]',
+        COLLAPSE: 'button[class="navbar-toggler"]'
     },
     SETTINGS: {
         RESET: '[href="/reset"]',

@@ -46,18 +46,35 @@ describe('Should test transactions feature at an interface level', () => {
         cy.get(locators.MESSAGE).should('contain', 'Movimentação removida com sucesso!')
     })
 
-    it.only('Should test colors', () => {
-        cy.intercept('GET', '/extrato/**', [
-        {conta: "Conta com movimentacao", id: 1610912, descricao: "Receita paga", envolvido: "BBB", observacao: null, tipo: "REC", data_transacao: "2023-04-24T03:00:00.000Z", data_pagamento: "2023-04-24T03:00:00.000Z", valor: "-1500.00", status: true, conta_id: 1720266, usuario_id: 36898, transferencia_id: null, parcelamento_id: null},
-        {conta: "Conta para saldo", id: 1610913, descricao: "Receita pendente", envolvido: "CCC", observacao: null, tipo: "REC", data_transacao: "2023-04-24T03:00:00.000Z", data_pagamento: "2023-04-24T03:00:00.000Z", valor: "3500.00", status: false, conta_id: 1720267, usuario_id: 36898, transferencia_id: null, parcelamento_id :null},
-        {conta: "Conta para saldo", id: 1610914, descricao: "Despesa paga", envolvido: "DDD", observacao: null, tipo: "DESP", data_transacao: "2023-04-24T03:00:00.000Z", data_pagamento: "2023-04-24T03:00:00.000Z", valor: "-1000.00", status: true, conta_id: 1720267, usuario_id: 36898, transferencia_id: null, parcelamento_id: null},
-        {conta: "Conta para saldo", id: 1610915, descricao: "Despesa pendente", envolvido: "EEE", observacao: null, tipo: "DESP", data_transacao: "2023-04-24T03:00:00.000Z", data_pagamento: "2023-04-24T03:00:00.000Z", valor: "1534.00", status: false, conta_id: 1720267, usuario_id: 36898, transferencia_id: null, parcelamento_id: null},
-        ])
+    it('Should test colors', () => {
+        cy.fixture('contasStatus').then((contasStatus) => {
+            cy.intercept('GET', '/extrato/**', contasStatus)
+        })
 
         cy.get(locators.MENU.EXTRATO).click()
         cy.xpath(locators.EXTRATO.GET_LINHA('Receita paga')).should('have.class', 'receitaPaga')
         cy.xpath(locators.EXTRATO.GET_LINHA('Receita pendente')).should('have.class', 'receitaPendente')
         cy.xpath(locators.EXTRATO.GET_LINHA('Despesa paga')).should('have.class', 'despesaPaga')
         cy.xpath(locators.EXTRATO.GET_LINHA('Despesa pendente')).should('have.class', 'despesaPendente')
+    })
+
+    it('Should test the responsiveness', () => {
+        cy.get(locators.MENU.HOME).should('exist')
+            .and('be.visible')
+        cy.get(locators.MENU.COLLAPSE).should('be.not.visible') 
+        cy.viewport(500, 700)
+        cy.get(locators.MENU.HOME).should('exist')
+            .and('be.not.visible')
+        cy.get(locators.MENU.COLLAPSE).should('be.visible')
+
+        cy.viewport('iphone-5')
+        cy.get(locators.MENU.HOME).should('exist')
+            .and('be.not.visible')
+        cy.get(locators.MENU.COLLAPSE).should('be.visible')
+        
+        cy.viewport('ipad-2')
+        cy.get(locators.MENU.HOME).should('exist')
+            .and('be.visible')
+        cy.get(locators.MENU.COLLAPSE).should('be.not.visible') 
     })
 })
