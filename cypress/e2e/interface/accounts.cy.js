@@ -25,25 +25,11 @@ describe('Should test accounts feature at an interface level', () => {
         cy.accessAccounts()
 
         cy.intercept('GET', '/contas', 
-            [{
-                id: 1,
-                nome: 'Carteira',
-                visivel: true,
-                usuario_id: 1
-            },
-            {
-                id: 2,
-                nome: 'Banco',
-                visivel: true,
-                usuario_id: 1
-            },
-            {
-                id: 3,
-                nome: 'Conta de teste',
-                visivel: true,
-                usuario_id: 1
-            }
-        ]
+            [
+            {id: 1, nome: 'Carteira', visivel: true, usuario_id: 1},
+            {id: 2, nome: 'Banco', visivel: true, usuario_id: 1},
+            {id: 3, nome: 'Conta de teste', visivel: true, usuario_id: 1}
+            ]
         ).as('contasSave')
 
         cy.createAccount('Conta de teste')
@@ -61,18 +47,10 @@ describe('Should test accounts feature at an interface level', () => {
         cy.accessAccounts()
 
         cy.intercept('GET', '/contas', 
-        [{
-            id: 1,
-            nome: 'Conta alterada',
-            visivel: true,
-            usuario_id: 1
-        },
-        {
-            id: 2,
-            nome: 'Banco',
-            visivel: true,
-            usuario_id: 1
-        }]
+            [
+            {id: 1, nome: 'Conta alterada', visivel: true, usuario_id: 1},
+            {id: 2, nome: 'Banco', visivel: true, usuario_id: 1}
+            ]
         ).as('contas')
 
         cy.updateAccount('Carteira', 'Conta alterada')
@@ -90,5 +68,4 @@ describe('Should test accounts feature at an interface level', () => {
         cy.createAccount('Conta mesmo nome')
         cy.get(locators.MESSAGE).should('contain', 'Erro: Error: Request failed with status code 400')
     })
-
 })
